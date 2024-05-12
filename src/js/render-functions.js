@@ -1,6 +1,6 @@
 
 export function renderImages(images) {
-    const gallery = document.querySelector('.gallery');
+    const gallery = document.querySelector('.js-gallery');
     gallery.innerHTML = images.map(image => `
         <div class="card">
         <a class="gallery-link" href="${image.largeImageURL}">

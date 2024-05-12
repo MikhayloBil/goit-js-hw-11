@@ -36,6 +36,7 @@ searchForm.addEventListener('submit', (event) => {
                     title: 'Info',
                     message: 'Sorry, there are no images matching your search query. Please try again!',
                 });
+                galleryEl.innerHTML = '';
             } else {
                 renderImages(images);
                 const lightbox = new SimpleLightbox('.gallery a');
@@ -52,7 +53,7 @@ searchForm.addEventListener('submit', (event) => {
         .finally(() => {            
             loaderEl.classList.add('is-hidden');
             event.target.reset();
-            galleryEl.innerHTML = '';
+            
         });
         
 });

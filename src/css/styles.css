@@ -44,7 +44,7 @@ background: rgba(78, 117, 255, 1);
 
 }
 
-.gallery {
+.js-gallery {
 display: flex;
 flex-wrap: wrap;
 gap: 24px;
