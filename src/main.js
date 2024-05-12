@@ -9,7 +9,7 @@ const searchForm = document.querySelector('.js-search-form');
 const galleryEl = document.querySelector('.js-gallery');
 const loaderEl = document.querySelector('.js-loader');
 
-searchForm.addEventListener('submit', async (event) => {
+searchForm.addEventListener('submit', (event) => {
     event.preventDefault();
 
     const searchInput = document.querySelector('.js-search-input');
@@ -25,27 +25,30 @@ searchForm.addEventListener('submit', async (event) => {
         return;
     }
 
-    galleryEl.innerHTML = '';
+    
     loaderEl.classList.remove('is-hidden');
+    galleryEl.innerHTML = '';
 
-    try {
-        const images = await fetchImages(query);
-        if (images.length === 0) {
-            iziToast.info({
-                title: 'Info',
-                message: 'Sorry, there are no images matching your search query. Please try again!',
+    fetchImages(query)
+        .then(images => {
+            if (images.length === 0) {
+                iziToast.info({
+                    title: 'Info',
+                    message: 'Sorry, there are no images matching your search query. Please try again!',
+                });
+            } else {
+                renderImages(images);
+            }
+        })
+        .catch(error => {
+            console.error(error);
+            iziToast.error({
+                title: 'Error',
+                message: 'Failed to fetch images. Please try again later.',
             });
-        } else {
-            galleryEl.innerHTML = renderImages(images);
-        }
-    } catch (error) {
-        console.error(error);
-        iziToast.error({
-            title: 'Error',
-            message: 'Failed to fetch images. Please try again later.',
+        })
+        .finally(() => {            
+            loaderEl.classList.add('is-hidden');
+            event.target.reset();
         });
-    } finally {
-        event.target.reset();
-        loaderEl.classList.add('is-hidden');
-    }
 });
