@@ -3,8 +3,9 @@ export function renderImages(images) {
     const gallery = document.querySelector('.gallery');
     gallery.innerHTML = images.map(image => `
         <div class="card">
+        <a class="gallery-link" href="${image.largeImageURL}">
             <img src="${image.webformatURL}" alt="${image.tags}" class="gallery-img img-fluid" />
-           
+           </a>
                 <div class="card-info">
                     <p class="card-text">Likes: ${image.likes}</p>
                     <p class="card-text">Views: ${image.views}</p>

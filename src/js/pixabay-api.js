@@ -12,6 +12,6 @@ export async function fetchImages(query) {
     return data.hits;
   } catch (error) {
     console.error(error);
-    return [];
-  }
+    return [];    
+  }  
 }

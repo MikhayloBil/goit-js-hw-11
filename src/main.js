@@ -11,11 +11,11 @@ const loaderEl = document.querySelector('.js-loader');
 
 searchForm.addEventListener('submit', (event) => {
     event.preventDefault();
-
+    
     const searchInput = document.querySelector('.js-search-input');
     const query = searchInput.value.trim();
 
-    if (query === '') {
+    if (query.trim() === '') {
         galleryEl.innerHTML = '';
         event.target.reset();
         iziToast.error({
@@ -38,6 +38,8 @@ searchForm.addEventListener('submit', (event) => {
                 });
             } else {
                 renderImages(images);
+                const lightbox = new SimpleLightbox('.gallery a');
+            lightbox.refresh();
             }
         })
         .catch(error => {
@@ -50,5 +52,8 @@ searchForm.addEventListener('submit', (event) => {
         .finally(() => {            
             loaderEl.classList.add('is-hidden');
             event.target.reset();
+            galleryEl.innerHTML = '';
         });
+        
 });
+
